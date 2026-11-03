@@ -39,11 +39,20 @@ docker build \
 ### 2. WebUI
 
 ```bash
-docker run -d --name asr-webui --restart unless-stopped -p 7870:7870 asr:latest
+docker run -d --name asr-webui --restart unless-stopped \
+    -p 7870:7870 \
+    --tmpfs /home/asr/jobs:rw,size=4g,mode=1777 \
+    asr:latest
 curl http://127.0.0.1:7870/api/health     # {"ok":true,"jobs":0}
 ```
 
 打开 <http://127.0.0.1:7870>，拖入音频 → 选选项 → 开始转录，完成后在线看全文并下载三种格式。
+
+> **`--tmpfs` 的作用**：上传的音频和转录产物不落盘，只占内存；容器 `docker stop`、重启或**整机关机时由内核自动清空**，不需要任何清理任务，容器可写层也不会越积越大（实测不加这个参数，3 次上传就把可写层撑到 789 MB）。
+>
+> - `mode=1777` **不能省**——tmpfs 默认属主是 root，而容器以 uid 1000 运行，漏了会 `PermissionError: Permission denied`
+> - `size=4g` 是内存上限保护，防止超大视频吃满内存
+> - **先下载结果再停止容器**：WebUI 里取走 `.txt` / `.srt` / `.json` 之后再 `docker stop`，否则任务会一起消失
 
 ### 3. 命令行
 
