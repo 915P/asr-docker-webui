@@ -105,8 +105,11 @@ docker run --rm -v 音频所在目录:/data asr:latest /data/录音.mp3
 ├── entrypoint.sh      无参数→WebUI；带参数→转录 CLI
 ├── transcribe.py      转录主程序（解码 / 推理 / 组装 / 写出）
 ├── webui.py           FastAPI 单页：上传、进度、结果、下载
-└── run_webui.sh       首次创建容器的包装（已存在时只做 docker start + 健康检查）
+├── run_webui.sh       首次创建容器的包装（已存在时只做 docker start + 健康检查）
+└── docs/DEPLOY.md     部署与运维：日常命令、排错表、体积口径、构建取舍
 ```
+
+> 更完整的**部署、日常启停、排错对照表、镜像体积口径**见 [docs/DEPLOY.md](docs/DEPLOY.md)。
 
 ## 依赖与许可
 
