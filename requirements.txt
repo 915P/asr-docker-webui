@@ -1,0 +1,10 @@
+# CPU 版 torch：必须钉死 +cpu 本地版本号，否则会选到 PyPI 的 CUDA 构建，
+# 拉进 2.5G 的 nvidia 依赖，镜像会膨胀。
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.15.0+cpu
+torchaudio==2.11.1+cpu
+numpy<2
+funasr==1.4.20
+fastapi==0.162.0
+uvicorn==0.54.0
+python-multipart

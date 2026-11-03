@@ -1,0 +1,31 @@
+# ---- 隐私数据，绝不入库 ----
+transcript*
+webui_jobs/
+outputs/
+*_work/
+*.mp3
+*.wav
+*.m4a
+*.mp4
+*.flac
+*.aac
+*.ogg
+
+# ---- 虚拟环境（Docker 化后已不再需要）----
+lib/
+bin/
+include/
+share/
+lib64/
+pyvenv.cfg
+
+# ---- 内部调参遗留（引用了已弃用的 ct-punc，不对外）----
+bench.py
+bench_segs/
+
+# ---- 通用 ----
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store
+*.log

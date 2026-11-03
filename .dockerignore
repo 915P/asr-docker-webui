@@ -1,0 +1,7 @@
+# 精简上下文：本目录里有 1.8G 的 venv 和转录产物，绝不能打进 build context
+*
+!Dockerfile
+!requirements.txt
+!entrypoint.sh
+!transcribe.py
+!webui.py
